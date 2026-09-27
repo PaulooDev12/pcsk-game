@@ -1,5 +1,6 @@
 .vscode
 .bin
 .bin/
+.bin/Debug
 .obj/
 .obj

@@ -35,3 +35,8 @@
 /home/paulo/Documentos/pcsk/obj/Debug/net8.0/pcsk.genruntimeconfig.cache
 /home/paulo/Documentos/pcsk/obj/Debug/net8.0/ref/pcsk.dll
 /home/paulo/Documentos/pcsk/bin/Debug/net8.0/Content/atwriter.xnb
+/home/paulo/Documentos/pcsk/obj/Debug/net8.0/pcsk.sourcelink.json
+/home/paulo/Documentos/pcsk/bin/Debug/net8.0/Content/chest.xnb
+/home/paulo/Documentos/pcsk/bin/Debug/net8.0/Content/grass_tile.xnb
+/home/paulo/Documentos/pcsk/bin/Debug/net8.0/Content/lava_tile.xnb
+/home/paulo/Documentos/pcsk/bin/Debug/net8.0/Content/wall_tile.xnb

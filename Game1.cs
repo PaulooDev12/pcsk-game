@@ -1,10 +1,15 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using camera;
+using inputs;
+using player;
+using tileMap;
 
-namespace pcsk;
-
-public class Game1 : Game
+namespace pcsk
+{
+ public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
@@ -35,8 +40,16 @@ public class Game1 : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+        var tileTextures = new Dictionary<TileType, Texture2D>
+        {
+            {TileType.Wall, Content.Load<Texture2D>("wall_tile")},
+            {TileType.Grass, Content.Load<Texture2D>("grass_tile")},
+            {TileType.Chest, Content.Load<Texture2D>("chest")},
+            {TileType.Lava, Content.Load<Texture2D>("lava_tile")},
+        };
+
         // TODO: use this.Content to load your game content here
-        _map = new(GraphicsDevice);
+        _map = new Map(tileTextures);
         _player = new Player(GraphicsDevice, new Vector2(100,100));
         _camera = new Camera2D();
 
@@ -46,10 +59,7 @@ public class Game1 : Game
     {
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
-        if(_player.life <= 0)
-        {
-            Exit();
-        }
+        
 
         Input.Update();
         // TODO: Add your update logic here
@@ -81,4 +91,6 @@ public class Game1 : Game
 
         base.Draw(gameTime);
     }
+}  
 }
+
