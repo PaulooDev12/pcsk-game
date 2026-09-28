@@ -6,5 +6,6 @@ public enum TileType
     Wall = 1,
     Chest = 2,
     Lava = 3,
+    Npc = 4,
 }    
 }
