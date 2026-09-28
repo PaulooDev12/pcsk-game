@@ -1,6 +1,9 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
 "/home/paulo/Documentos/pcsk/Content/atwriter.spritefont","/home/paulo/Documentos/pcsk/Content/bin/DesktopGL/Content/atwriter.xnb","FontDescriptionProcessor","SpriteFontContent",2011,21529,0.3136038
+"/home/paulo/Documentos/pcsk/Content/ch.jpg","/home/paulo/Documentos/pcsk/Content/bin/DesktopGL/Content/ch.xnb","TextureProcessor","Texture2DContent",24441,2140373,0.3160922
 "/home/paulo/Documentos/pcsk/Content/chest.png","/home/paulo/Documentos/pcsk/Content/bin/DesktopGL/Content/chest.xnb","TextureProcessor","Texture2DContent",728,16469,0.2011878
 "/home/paulo/Documentos/pcsk/Content/grass_tile.png","/home/paulo/Documentos/pcsk/Content/bin/DesktopGL/Content/grass_tile.xnb","TextureProcessor","Texture2DContent",4727,16469,0.0061796
 "/home/paulo/Documentos/pcsk/Content/lava_tile.png","/home/paulo/Documentos/pcsk/Content/bin/DesktopGL/Content/lava_tile.xnb","TextureProcessor","Texture2DContent",4429,16469,0.0097915
+"/home/paulo/Documentos/pcsk/Content/npcs.json","/home/paulo/Documentos/pcsk/Content/bin/DesktopGL/Content/npcs.json","CopyItem","File",568,568,0.000439
+"/home/paulo/Documentos/pcsk/Content/npctile.jpg","/home/paulo/Documentos/pcsk/Content/bin/DesktopGL/Content/npctile.xnb","TextureProcessor","Texture2DContent",40593,1077529,0.2371655
 "/home/paulo/Documentos/pcsk/Content/wall_tile.png","/home/paulo/Documentos/pcsk/Content/bin/DesktopGL/Content/wall_tile.xnb","TextureProcessor","Texture2DContent",1300,16469,0.0022268

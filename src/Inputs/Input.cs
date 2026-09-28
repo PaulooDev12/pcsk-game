@@ -4,7 +4,6 @@ namespace inputs
 {
 public static class Input
 {
-
     private static KeyboardState _currentKey;
 
     private static KeyboardState _previousKey;
@@ -19,4 +18,3 @@ public static class Input
     public static bool isKeyPressed(Keys key) => _currentKey.IsKeyDown(key) && _previousKey.IsKeyUp(key);
 }    
 }
-

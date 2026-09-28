@@ -6,6 +6,7 @@ using camera;
 using inputs;
 using player;
 using tileMap;
+using interactions;
 
 namespace pcsk
 {
@@ -16,6 +17,8 @@ namespace pcsk
     private Map _map;
     private Player _player;
     private Camera2D _camera;
+
+    private Texture2D _blankTextue;
 
     private SpriteFont _font;
     public Game1()
@@ -28,8 +31,8 @@ namespace pcsk
     protected override void Initialize()
     {
         // TODO: Add your initialization logic here
-        _graphics.PreferredBackBufferWidth = 800;
-        _graphics.PreferredBackBufferHeight = 600;
+        _graphics.PreferredBackBufferWidth = 1280;
+        _graphics.PreferredBackBufferHeight = 720;
         _graphics.SynchronizeWithVerticalRetrace = true;
         _graphics.ApplyChanges();
         _font = Content.Load<SpriteFont>("atwriter");
@@ -46,11 +49,15 @@ namespace pcsk
             {TileType.Grass, Content.Load<Texture2D>("grass_tile")},
             {TileType.Chest, Content.Load<Texture2D>("chest")},
             {TileType.Lava, Content.Load<Texture2D>("lava_tile")},
+            {TileType.Npc, Content.Load<Texture2D>("npctile")}
         };
 
+        _blankTextue = new Texture2D(GraphicsDevice, 1, 1);
+        _blankTextue.SetData(new[] {Color.White});
         // TODO: use this.Content to load your game content here
-        _map = new Map(tileTextures);
-        _player = new Player(GraphicsDevice, new Vector2(100,100));
+        _map = new Map(tileTextures, Content);
+        Texture2D playerTexture = Content.Load<Texture2D>("ch");
+        _player = new Player(new Vector2(100,100), playerTexture);
         _camera = new Camera2D();
 
     }
@@ -63,6 +70,7 @@ namespace pcsk
 
         Input.Update();
         // TODO: Add your update logic here
+        DialogueManager.Update();
         _player.Update(gameTime, _map);
         _camera.Follow(_player.Position, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
         base.Update(gameTime);
@@ -85,6 +93,10 @@ namespace pcsk
             _spriteBatch.DrawString(_font, _player.getPosition(), new Vector2(10,-5), Color.White);
         }
 
+        _spriteBatch.End();
+
+        _spriteBatch.Begin();
+        DialogueManager.Draw(_spriteBatch, _font, _blankTextue, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
         _spriteBatch.End();
 
         // TODO: Add your drawing code here

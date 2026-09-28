@@ -5,12 +5,16 @@
   <Config />
   <SourceFiles>
     <File>/home/paulo/Documentos/pcsk/Content/atwriter.spritefont</File>
+    <File>/home/paulo/Documentos/pcsk/Content/ch.jpg</File>
     <File>/home/paulo/Documentos/pcsk/Content/chest.png</File>
     <File>/home/paulo/Documentos/pcsk/Content/grass_tile.png</File>
     <File>/home/paulo/Documentos/pcsk/Content/lava_tile.png</File>
+    <File>/home/paulo/Documentos/pcsk/Content/npctile.jpg</File>
     <File>/home/paulo/Documentos/pcsk/Content/wall_tile.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

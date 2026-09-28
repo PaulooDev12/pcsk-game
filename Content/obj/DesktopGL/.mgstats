@@ -1,2 +1,3 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"/home/paulo/Documentos/pcsk/Content/lava_tile.png","/home/paulo/Documentos/pcsk/Content/bin/DesktopGL/lava_tile.xnb","TextureProcessor","Texture2DContent",4429,16469,0,2401498
+"/home/paulo/Documentos/pcsk/Content/ch.jpg","/home/paulo/Documentos/pcsk/Content/bin/DesktopGL/ch.xnb","TextureProcessor","Texture2DContent",24441,2140373,0,3470219
+"/home/paulo/Documentos/pcsk/Content/npcs.json","/home/paulo/Documentos/pcsk/Content/bin/DesktopGL/npcs.json","CopyItem","File",568,568,0,0006243

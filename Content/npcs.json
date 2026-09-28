@@ -1,0 +1,32 @@
+[
+  {
+    "Name": "Mago Curandeiro",
+    "TileX": 1,
+    "TileY": 1,
+    "sprite": "mage_npc",
+    "healAmount": 50,
+    "dialogue": [
+      "Sinta a energia da luz!",
+      "Sua saude foi restaurada."
+    ]
+  },
+  {
+    "Name": "Ferreiro Agil",
+    "TileX": 3,
+    "TileY": 2,
+    "sprite": "blacksmith_npc",
+    "giveItem": "Bota de Velocidade",
+    "dialogue": [
+      "Tome estas botas leves.",
+      "Voce se movera muito mais rapido agora!"
+    ]
+  },
+  {
+    "Name": "Guarda Silencioso",
+    "TileX": 2,
+    "TileY": 3,
+    "dialogue": [
+      "..."
+    ]
+  }
+]
