@@ -43,5 +43,11 @@ namespace player
             
             return direction;
         }
+        public static void Heal(int healAmount)
+        {
+            int newHeal = Math.Clamp(CurrentLife += healAmount,0, 100);
+            CurrentLife = newHeal;
+            
+        }
     }
 }
