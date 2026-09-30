@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
-namespace physics
+namespace pcsk.src.Physics
 {
     public static class Collisions
     {

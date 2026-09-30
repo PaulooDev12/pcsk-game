@@ -1,5 +1,5 @@
 using Microsoft.Xna.Framework;
-namespace camera
+namespace pcsk.src.Camera
 {
 public class Camera2D
 {

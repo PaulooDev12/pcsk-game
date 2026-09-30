@@ -1,4 +1,4 @@
-namespace tileMap
+namespace pcsk.src.TileMap
 {
 public enum TileType
 {

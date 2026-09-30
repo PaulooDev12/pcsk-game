@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 using System.IO;
 using System.Text.Json;
-using interactions;
+using pcsk.src.Interactions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace data
+namespace pcsk.src.Data
 {
     public static class NpcLoader
     {

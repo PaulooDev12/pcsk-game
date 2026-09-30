@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 
-namespace interactions
+namespace pcsk.src.Interactions
 {
     public interface IInteractable
     {

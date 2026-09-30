@@ -2,11 +2,13 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using camera;
-using inputs;
-using player;
-using tileMap;
-using interactions;
+using pcsk.src.Camera;
+using pcsk.src.Inputs;
+using pcsk.src.Playeer;
+using pcsk.src.TileMap;
+using pcsk.src.Interactions.Handlers;
+using pcsk.src.Screen.Managers;
+using pcsk.src.Screen;
 
 namespace pcsk
 {
@@ -17,7 +19,6 @@ namespace pcsk
     private Map _map;
     private Player _player;
     private Camera2D _camera;
-
     private Texture2D _blankTextue;
 
     private SpriteFont _font;
@@ -49,7 +50,6 @@ namespace pcsk
             {TileType.Grass, Content.Load<Texture2D>("grass_tile")},
             {TileType.Chest, Content.Load<Texture2D>("chest")},
             {TileType.Lava, Content.Load<Texture2D>("lava_tile")},
-            {TileType.Npc, Content.Load<Texture2D>("npctile")}
         };
 
         _blankTextue = new Texture2D(GraphicsDevice, 1, 1);
@@ -60,19 +60,21 @@ namespace pcsk
         _player = new Player(new Vector2(100,100), playerTexture);
         _camera = new Camera2D();
 
+        var gameplayScreen = new GameplayScreen(_player, _map, _camera, _font, _blankTextue, GraphicsDevice);
+
+        ScreenManager.ChangeState(new MainMenuScreen(gameplayScreen, _font));
     }
 
     protected override void Update(GameTime gameTime)
     {
-        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            Exit();
+        // if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+        //     Exit();
         
-
         Input.Update();
+        ScreenManager.Update(gameTime);
+
         // TODO: Add your update logic here
-        DialogueManager.Update();
-        _player.Update(gameTime, _map);
-        _camera.Follow(_player.Position, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+        
         base.Update(gameTime);
     }
 
@@ -80,24 +82,7 @@ namespace pcsk
     {
         GraphicsDevice.Clear(Color.CornflowerBlue);
 
-        _spriteBatch.Begin(transformMatrix: _camera.Transform);
-
-        _map.Draw(_spriteBatch);
-
-        _player.Draw(_spriteBatch);
-        _spriteBatch.End();
-
-        _spriteBatch.Begin();
-        if(_font != null)
-        {
-            _spriteBatch.DrawString(_font, _player.getPosition(), new Vector2(10,-5), Color.White);
-        }
-
-        _spriteBatch.End();
-
-        _spriteBatch.Begin();
-        DialogueManager.Draw(_spriteBatch, _font, _blankTextue, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-        _spriteBatch.End();
+        ScreenManager.Draw(_spriteBatch);
 
         // TODO: Add your drawing code here
 

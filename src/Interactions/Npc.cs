@@ -3,9 +3,10 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using player;
+using pcsk.src.Playeer;
+using pcsk.src.Interactions.Handlers;
 
-namespace interactions
+namespace pcsk.src.Interactions
 {
     public class Npc : IInteractable
     {

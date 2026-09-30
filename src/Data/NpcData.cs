@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace data
+namespace pcsk.src.Data
 {
     public class NpcData
     {

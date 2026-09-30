@@ -1,19 +1,24 @@
 using System.Collections.Generic;
-using inputs;
+using pcsk.src.Inputs;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 using Microsoft.Xna.Framework;
 using System;
 
-namespace interactions
+namespace pcsk.src.Interactions.Handlers
 {
     public static class DialogueManager
     {
         public static bool IsActive {get; private set;} = false;
         private static string _speakerName;
-        private static List<string> _lines;
-        private static int _currentLineIndex;
+        private static List<string> _lines = new();
+        private static int _currentLineIndex = 0;
+        private static string _fullText = "";
+        private static string _visibleText = "";
+        private static double _timePerChar = 0.03;
+        private static double _charTimer = 0;
+        private static int _currentCharIndex = 0;
 
         public static void StartDialogue(string name, List<string> lines)
         {
@@ -22,26 +27,59 @@ namespace interactions
             Console.WriteLine("Erro: Os dialogos do json não foram carregados corretamente");  
             return;  
         } 
-
+        
          _speakerName = name;
          _lines = lines;
          _currentLineIndex = 0;
+
          IsActive = true;
+
+         SetupCurrentLine();
         }
 
-        public static void Update()
+        private static void SetupCurrentLine()
+        {
+            _fullText = _lines[_currentLineIndex];
+            _visibleText = "";
+            _currentCharIndex = 0;
+            _charTimer = 0;
+        }
+
+        public static void Update(GameTime gameTime)
         {
             if(!IsActive) return;
-
-            if(Input.isKeyPressed(Keys.E) || Input.isKeyPressed(Keys.Space))
+            
+            if(_currentCharIndex < _fullText.Length)
             {
-                
-                if(_currentLineIndex + 1 >= _lines.Count)
-                {
-                    IsActive = false;
-                }
+                _charTimer += gameTime.ElapsedGameTime.TotalSeconds;
 
-                _currentLineIndex++;
+                if(_charTimer >= _timePerChar)
+                {
+                    _currentCharIndex++;
+                    _visibleText = _fullText.Substring(0, _currentCharIndex);
+                    _charTimer -= _timePerChar;
+                }
+            }
+            if(Input.IsKeyPressed(Keys.E) || Input.IsKeyPressed(Keys.Space))
+            {
+                if(_currentCharIndex < _fullText.Length)
+                {
+                    _currentCharIndex = _fullText.Length;
+                    _visibleText = _fullText;
+                }
+                else
+                {
+                    _currentLineIndex++;
+                    if(_currentLineIndex >= _lines.Count)
+                    {
+                        
+                        IsActive = false;
+                    }
+                    else
+                    {
+                        SetupCurrentLine();
+                    }
+                }
             }
         }
         public static void Draw(SpriteBatch spriteBatch, SpriteFont font, Texture2D boxTexture, int screenWidth, int screenHeight)
@@ -53,9 +91,8 @@ namespace interactions
             spriteBatch.Draw(boxTexture, boxRect, Color.Black * 0.85f);
 
             string nameText = $"[{_speakerName}]";
-            string currentText = _lines[_currentLineIndex];
             spriteBatch.DrawString(font, nameText, new Vector2(boxRect.X + 15, boxRect.Y + 10), Color.Gold);
-            spriteBatch.DrawString(font, currentText, new Vector2(boxRect.X + 15, boxRect.Y + 40), Color.White);
+            spriteBatch.DrawString(font, _visibleText, new Vector2(boxRect.X + 15, boxRect.Y + 40), Color.White);
                 
         }
     }

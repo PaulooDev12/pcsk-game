@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework.Input;
 
-namespace inputs
+namespace pcsk.src.Inputs
 {
 public static class Input
 {
@@ -13,8 +13,8 @@ public static class Input
         _previousKey = _currentKey;
         _currentKey = Keyboard.GetState();
     }
-    public static bool isKeyDown(Keys key) => _currentKey.IsKeyDown(key);
+    public static bool IsKeyDown(Keys key) => _currentKey.IsKeyDown(key);
 
-    public static bool isKeyPressed(Keys key) => _currentKey.IsKeyDown(key) && _previousKey.IsKeyUp(key);
+    public static bool IsKeyPressed(Keys key) => _currentKey.IsKeyDown(key) && _previousKey.IsKeyUp(key);
 }    
 }

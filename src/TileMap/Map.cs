@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using data;
-using interactions;
+using pcsk.src.Data;
+using pcsk.src.Interactions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-namespace tileMap{
+namespace pcsk.src.TileMap{
 public class Map
 {
    private readonly TileType[,] _mapData = new TileType[,]
@@ -15,7 +15,7 @@ public class Map
             { TileType.Wall, TileType.Grass,  TileType.Wall,  TileType.Wall },
         };
 
-    private readonly int _tileSize = 64;
+    private readonly int _tileSize = 128;
     private readonly Dictionary<TileType, Texture2D> _tileTextures;
     public List<Rectangle> WallColliders {get; private set;} = new();
     public List<Rectangle> Interactables {get; private set;} = new();
@@ -70,8 +70,7 @@ public class Map
         }
         foreach(var npc in Npcs)
             {
-                npc.Draw(spriteBatch);
-                
+                npc.Draw(spriteBatch);   
             }
     }
    

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-namespace player
+namespace pcsk.src.Playeer
 {
     public static class PlayerHandlers
     {
