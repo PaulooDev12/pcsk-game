@@ -44,23 +44,15 @@ namespace pcsk
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-        var tileTextures = new Dictionary<TileType, Texture2D>
-        {
-            {TileType.Wall, Content.Load<Texture2D>("wall_tile")},
-            {TileType.Grass, Content.Load<Texture2D>("grass_tile")},
-            {TileType.Chest, Content.Load<Texture2D>("chest")},
-            {TileType.Lava, Content.Load<Texture2D>("lava_tile")},
-        };
-
+        // TODO: use this.Content to load your game content here
         _blankTextue = new Texture2D(GraphicsDevice, 1, 1);
         _blankTextue.SetData(new[] {Color.White});
-        // TODO: use this.Content to load your game content here
-        _map = new Map(tileTextures, Content);
+
         Texture2D playerTexture = Content.Load<Texture2D>("ch");
-        _player = new Player(new Vector2(100,100), playerTexture);
+        _player = new Player(new Vector2(600,600), playerTexture);
         _camera = new Camera2D();
 
-        var gameplayScreen = new GameplayScreen(_player, _map, _camera, _font, _blankTextue, GraphicsDevice);
+        var gameplayScreen = new GameplayScreen(_player,  _camera, _font, _blankTextue, GraphicsDevice, Content);
 
         ScreenManager.ChangeState(new MainMenuScreen(gameplayScreen, _font));
     }

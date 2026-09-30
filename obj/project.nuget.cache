@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "hmqP4NcvcfxFUYLw83LlyuWAntRqqSfYyCoyBM+Qg+jTRFVS4a8MRHgTOlm8fWmTOE5SfzHOk36/mh2uqX1VNw==",
+  "dgSpecHash": "qh3VFGPOXjJGAryV7szY4YJzEvSNtCMQSEnCIKEj69mHmD+7vbG3nOjY16r4HI3lAGQRHdv6w5aKm4PsMtPebg==",
   "success": true,
   "projectFilePath": "/home/paulo/Documentos/pcsk/pcsk.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,7 @@
     "/home/paulo/.nuget/packages/nvorbis/0.10.4/nvorbis.0.10.4.nupkg.sha512",
     "/home/paulo/.nuget/packages/system.memory/4.5.3/system.memory.4.5.3.nupkg.sha512",
     "/home/paulo/.nuget/packages/system.valuetuple/4.5.0/system.valuetuple.4.5.0.nupkg.sha512",
+    "/home/paulo/.nuget/packages/tiledsharp/1.0.1/tiledsharp.1.0.1.nupkg.sha512",
     "/home/paulo/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.31/microsoft.aspnetcore.app.ref.8.0.31.nupkg.sha512"
   ],
   "logs": []

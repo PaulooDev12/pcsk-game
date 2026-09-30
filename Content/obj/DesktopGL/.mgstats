@@ -1,3 +1,4 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"/home/paulo/Documentos/pcsk/Content/ch.jpg","/home/paulo/Documentos/pcsk/Content/bin/DesktopGL/ch.xnb","TextureProcessor","Texture2DContent",24441,2140373,0,3470219
-"/home/paulo/Documentos/pcsk/Content/npcs.json","/home/paulo/Documentos/pcsk/Content/bin/DesktopGL/npcs.json","CopyItem","File",568,568,0,0006243
+"/home/paulo/Documentos/pcsk/Content/maps/map_test.tmx","/home/paulo/Documentos/pcsk/Content/bin/DesktopGL/maps/map_test.tmx","CopyItem","File",11450,11450,0,0008782
+"/home/paulo/Documentos/pcsk/Content/maps/mapaa.tmx","/home/paulo/Documentos/pcsk/Content/bin/DesktopGL/maps/mapaa.tmx","CopyItem","File",2611,2611,0,0004103
+"/home/paulo/Documentos/pcsk/Content/maps/tilesets-32x32.png","/home/paulo/Documentos/pcsk/Content/bin/DesktopGL/maps/tilesets-32x32.png","CopyItem","File",3418,3418,0,0001458

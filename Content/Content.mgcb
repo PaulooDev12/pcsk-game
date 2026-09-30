@@ -73,6 +73,18 @@
 /processorParam:Version=3.8.5.1
 /build:lava_tile.png
 
+#begin maps/gentleforestv03.png
+/copy:maps/gentleforestv03.png
+
+#begin maps/map_test.tmx
+/copy:maps/map_test.tmx
+
+#begin maps/mapaa.tmx
+/copy:maps/mapaa.tmx
+
+#begin maps/tilesets-32x32.png
+/copy:maps/tilesets-32x32.png
+
 #begin npcs.json
 /copy:npcs.json
 

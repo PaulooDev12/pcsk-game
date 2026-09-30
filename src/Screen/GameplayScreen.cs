@@ -7,6 +7,7 @@ using pcsk.src.Camera;
 using pcsk.src.Inputs;
 using Microsoft.Xna.Framework.Input;
 using pcsk.src.Interactions.Handlers;
+using Microsoft.Xna.Framework.Content;
 
 namespace pcsk.src.Screen
 {
@@ -14,16 +15,16 @@ namespace pcsk.src.Screen
     {
 
         private readonly Player _player;
-        private readonly Map _map;
         private readonly Camera2D _camera;
+        private readonly TiledMap _mapa;
         private readonly SpriteFont _font;
         private readonly Texture2D _boxTexture;
         private readonly GraphicsDevice _graphicsDevice;
 
-        public GameplayScreen(Player player, Map map, Camera2D camera, SpriteFont font, Texture2D boxTexture, GraphicsDevice graphicsDevice)
+        public GameplayScreen(Player player, Camera2D camera, SpriteFont font, Texture2D boxTexture, GraphicsDevice graphicsDevice, ContentManager content)
         {
             _player = player;
-            _map = map;
+            _mapa = new TiledMap(graphicsDevice, "Content/maps/mapaa.tmx", content);
             _camera = camera;
             _font = font;
             _boxTexture = boxTexture;
@@ -40,7 +41,7 @@ namespace pcsk.src.Screen
                 return;
             }
             DialogueManager.Update(gameTime);
-            _player.Update(gameTime, _map);
+            _player.Update(gameTime, _mapa);
             _camera.Follow(_player.Position, _graphicsDevice.Viewport.Width, _graphicsDevice.Viewport.Height);
         }
 
@@ -48,8 +49,10 @@ namespace pcsk.src.Screen
         {
 
             
-            spriteBatch.Begin(transformMatrix: _camera.Transform);
-            _map.Draw(spriteBatch);
+            spriteBatch.Begin(
+                samplerState: SamplerState.PointClamp,
+                transformMatrix: _camera.Transform);
+            _mapa.Draw(spriteBatch);
             _player.Draw(spriteBatch);
             spriteBatch.End();
 
