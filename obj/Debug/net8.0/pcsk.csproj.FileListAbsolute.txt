@@ -48,3 +48,7 @@
 /home/paulo/Documentos/pcsk/bin/Debug/net8.0/TiledSharp.dll
 /home/paulo/Documentos/pcsk/bin/Debug/net8.0/Content/maps/mapaa.tmx
 /home/paulo/Documentos/pcsk/bin/Debug/net8.0/Content/maps/tilesets-32x32.png
+/home/paulo/Documentos/pcsk/bin/Debug/net8.0/Content/maps/grass.png
+/home/paulo/Documentos/pcsk/bin/Debug/net8.0/Content/maps/mapa_brabo.tmx
+/home/paulo/Documentos/pcsk/bin/Debug/net8.0/Content/maps/plant.png
+/home/paulo/Documentos/pcsk/bin/Debug/net8.0/Content/maps/struct.png

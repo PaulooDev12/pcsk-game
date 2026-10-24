@@ -9,12 +9,17 @@ using pcsk.src.TileMap;
 using pcsk.src.Interactions.Handlers;
 using pcsk.src.Screen.Managers;
 using pcsk.src.Screen;
+using pcsk.src.Screen.MainMenu;
+using System.Diagnostics;
+using pcsk.src.debug;
 
 namespace pcsk
 {
  public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
+
+    private Enemy _enemy;
     private SpriteBatch _spriteBatch;
     private Map _map;
     private Player _player;
@@ -32,8 +37,8 @@ namespace pcsk
     protected override void Initialize()
     {
         // TODO: Add your initialization logic here
-        _graphics.PreferredBackBufferWidth = 1280;
-        _graphics.PreferredBackBufferHeight = 720;
+        _graphics.PreferredBackBufferWidth = 1920;
+        _graphics.PreferredBackBufferHeight = 1080;
         _graphics.SynchronizeWithVerticalRetrace = true;
         _graphics.ApplyChanges();
         _font = Content.Load<SpriteFont>("atwriter");
@@ -49,10 +54,12 @@ namespace pcsk
         _blankTextue.SetData(new[] {Color.White});
 
         Texture2D playerTexture = Content.Load<Texture2D>("ch");
+        
         _player = new Player(new Vector2(600,600), playerTexture);
         _camera = new Camera2D();
+        _enemy = new Enemy(new Vector2(600, 600), playerTexture, _player);
 
-        var gameplayScreen = new GameplayScreen(_player,  _camera, _font, _blankTextue, GraphicsDevice, Content);
+        var gameplayScreen = new GameplayScreen(_player, _enemy ,_camera, _font, _blankTextue, GraphicsDevice, Content);
 
         ScreenManager.ChangeState(new MainMenuScreen(gameplayScreen, _font));
     }
@@ -66,13 +73,17 @@ namespace pcsk
         ScreenManager.Update(gameTime);
 
         // TODO: Add your update logic here
+        if(Input.IsKeyPressed(Keys.LeftControl))
+            {
+                DebugMode.ToggleDebugMode();
+            }
         
         base.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.CornflowerBlue);
+        GraphicsDevice.Clear(Color.Black);
 
         ScreenManager.Draw(_spriteBatch);
 

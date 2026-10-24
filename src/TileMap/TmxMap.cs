@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using pcsk.src.Data;
+using pcsk.src.debug;
 using pcsk.src.Interactions;
 using TiledSharp;
 
@@ -18,41 +20,58 @@ namespace pcsk.src.TileMap
         private int _tileWidth;
         private int _tileHeight;
         public List<Rectangle> CollisionsRect { get; private set; } = new();
+        private Dictionary<int, Texture2D> _tilesetTextures = new();
 
-        public List<Npc> npcs {get; private set;} = new();
+        public List<Npc> Npcs {get; private set;} = new();
 
         public TiledMap(GraphicsDevice graphicsDevice, string tileMapPath, ContentManager content)
         {
             _map = new TmxMap(tileMapPath);
-            var tileset = _map.Tilesets[0];
+            
 
-            npcs = NpcLoader.LoadNpcDataJson("Content/npcs.json", 64, content);
+            Npcs = NpcLoader.LoadNpcDataJson("Content/npcs.json", 64, content);
 
             _tileWidth = _map.TileWidth;   
             _tileHeight = _map.TileHeight; 
 
             string mapDirectory = Path.GetDirectoryName(tileMapPath) ?? "Content/maps";
-            string imageFileName = Path.GetFileName(tileset.Image.Source);
-            string imagePath = Path.Combine(mapDirectory, imageFileName);
 
-            using (var stream = File.OpenRead(imagePath))
+            foreach(var tileset in _map.Tilesets)
             {
-                _tilesetTexture = Texture2D.FromStream(graphicsDevice, stream);
+                string imageFileName = Path.GetFileName(tileset.Image.Source);
+                string imagePath = Path.Combine(mapDirectory, imageFileName);
+                using (var stream = File.OpenRead(imagePath))
+                {
+                    Texture2D texture = Texture2D.FromStream(graphicsDevice, stream);
+                    _tilesetTextures.Add(tileset.FirstGid, texture);
+                }
             }
+            
 
             GenerateCollisions();
+        }
+
+        private TmxTileset GetTilesetForGid(int gid)
+        {
+            for(int i = _map.Tilesets.Count - 1; i>=0; i--)
+            {
+                if(gid >= _map.Tilesets[i].FirstGid) return _map.Tilesets[i];
+            }
+            return null;
         }
 
         private void GenerateCollisions()
         {
             CollisionsRect.Clear();
-            var tileset = _map.Tilesets[0];
+           
 
             foreach (var layer in _map.Layers)
             {
                 foreach (var tile in layer.Tiles)
                 {
                     if (tile.Gid == 0) continue;
+
+                    var tileset = GetTilesetForGid(tile.Gid);
 
                     int tileFrame = tile.Gid - tileset.FirstGid;
 
@@ -66,6 +85,7 @@ namespace pcsk.src.TileMap
                                 int x = tile.X * _tileWidth;
                                 int y = tile.Y * _tileHeight;
                                 CollisionsRect.Add(new Rectangle(x, y, _tileWidth, _tileHeight));
+                                
                             }
                         }
                     }
@@ -79,18 +99,16 @@ namespace pcsk.src.TileMap
                     CollisionsRect.Add(new Rectangle((int)obj.X, (int)obj.Y, (int)obj.Width, (int)obj.Height));
                 }
             }
+            foreach(var npc in Npcs)
+            {
+                CollisionsRect.Add(npc.Bounds);
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (_tilesetTexture == null || _map == null)
+            if (_map == null)
                 return;
-
-            var tileset = _map.Tilesets[0];
-
-            int tilesetColumns =
-                tileset.Columns ??
-                (_tilesetTexture.Width / _tileWidth);
 
             foreach (var layer in _map.Layers)
             {
@@ -104,11 +122,17 @@ namespace pcsk.src.TileMap
                     if (gid == 0)
                         continue;
 
-                    int tileFrame = gid - tileset.FirstGid;
+                    var tileset = GetTilesetForGid(gid);
+                    if(tileset == null) continue;
 
+                    if(!_tilesetTextures.TryGetValue(tileset.FirstGid, out Texture2D texture)) continue;
+
+                    int tileFrame = gid - tileset.FirstGid;
+                    
                     if (tileFrame < 0)
                         continue;
 
+                    int tilesetColumns = tileset.Columns ?? (texture.Width / _tileWidth);
                     int sourceColumn = tileFrame % tilesetColumns;
                     int sourceRow = tileFrame / tilesetColumns;
 
@@ -120,7 +144,7 @@ namespace pcsk.src.TileMap
                         tileset.Margin +
                         sourceRow * (tileset.TileHeight + tileset.Spacing);
 
-                    Rectangle sourceRect = new Rectangle(
+                    Rectangle sourceRect = new(
                         sourceX,
                         sourceY,
                         _tileWidth,
@@ -130,7 +154,7 @@ namespace pcsk.src.TileMap
                     int mapX = tile.X * _tileWidth;
                     int mapY = tile.Y * _tileHeight;
 
-                    Rectangle destRect = new Rectangle(
+                    Rectangle destRect = new(
                         mapX,
                         mapY,
                         _tileWidth,
@@ -138,16 +162,18 @@ namespace pcsk.src.TileMap
                     );
 
                     spriteBatch.Draw(
-                        _tilesetTexture,
+                        texture,
                         destRect,
                         sourceRect,
                         Color.White
                     );
-                    foreach (var npc in npcs)
-                    {
-                        npc.Draw(spriteBatch);
-                    }
+                    
                 }
+            }
+            foreach (var npc in Npcs)
+            {
+                
+                npc.Draw(spriteBatch);
             }
         }
     }

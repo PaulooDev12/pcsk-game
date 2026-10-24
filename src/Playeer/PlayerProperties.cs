@@ -5,9 +5,10 @@ namespace pcsk.src.Playeer
 {
     public static class PlayerProperties
     {
+        public static bool IsLockedSpeed {get; set;} = false;
         public static int MaxLife {get; private set;} = 100;
         public static float Speed {get; private set;} = 200f;
-        private static readonly float _runningSpeed = 700f;
+        private static readonly float _runningSpeed = 500f;
         private static readonly float _walkSpeed = 200f;
         public static int CurrentLife {get; private set;} = 100;
         public static float DamageTaked {get; private set;} = 20;
@@ -31,6 +32,11 @@ namespace pcsk.src.Playeer
         }
         public static void HandleSpeed(bool isRunning)
         {
+            if(IsLockedSpeed) 
+            {
+                Speed = isRunning ?  352f : _walkSpeed - 20;
+                return;
+            }
             Speed = isRunning ? _runningSpeed : _walkSpeed;
         } 
 

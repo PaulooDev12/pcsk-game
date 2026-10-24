@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using pcsk.src.Inputs;
 using pcsk.src.Screen.Managers;
 
-namespace pcsk.src.Screen
+namespace pcsk.src.Screen.MainMenu
 {
     public class MainMenuScreen : IScreen
     {

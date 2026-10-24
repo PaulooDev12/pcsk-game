@@ -5,19 +5,20 @@ public class Camera2D
 {
     public Matrix Transform {get; private set;}
 
-    public void Follow(Vector2 targetPosition, int screenWidth, int screenHeight)
-    {
-        var positon = Matrix.CreateTranslation(
-            -targetPosition.X,
-            -targetPosition.Y,
-            0);
+    private Vector2 _currentPosition = Vector2.Zero;
+    private readonly float _smoothSpeed = 0.1f;
 
-        var offset = Matrix.CreateTranslation(
-            screenWidth / 2f,
-            screenHeight / 2f,
-            0);
+    public void Follow(Vector2 targetPosition, int screenWidth, int screenHeight, float deltaTime)
+    {
+        Vector2 targetCenter = new(
+            targetPosition.X - (screenWidth / 2f),
+            targetPosition.Y - (screenHeight / 2f)
+        );
         
-        Transform = positon * offset;
+        _currentPosition = Vector2.Lerp(_currentPosition, targetCenter, _smoothSpeed);
+        Transform = Matrix.CreateTranslation(-_currentPosition.X, -_currentPosition.Y, 0);
+
+
     }
 }
 }

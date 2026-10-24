@@ -76,11 +76,23 @@
 #begin maps/gentleforestv03.png
 /copy:maps/gentleforestv03.png
 
+#begin maps/grass.png
+/copy:maps/grass.png
+
 #begin maps/map_test.tmx
 /copy:maps/map_test.tmx
 
+#begin maps/mapa_brabo.tmx
+/copy:maps/mapa_brabo.tmx
+
 #begin maps/mapaa.tmx
 /copy:maps/mapaa.tmx
+
+#begin maps/plant.png
+/copy:maps/plant.png
+
+#begin maps/struct.png
+/copy:maps/struct.png
 
 #begin maps/tilesets-32x32.png
 /copy:maps/tilesets-32x32.png
